@@ -1,27 +1,39 @@
 #!/usr/bin/env python3
 
-class Plant:
-    def __init__(self, name: str, height: int, age: int):
-        self.name = name
-        self.height = height
-        self.age = age
+from ex1.ft_garden_data import Plant
+
+
+class GrowthPlant(Plant):
+    def __init__(self, plant_name: str, plant_height: float, plant_days: int,
+                 growth_rate: float):
+        super().__init__(plant_name, plant_height, plant_days)
+        self.growth_rate = growth_rate
 
     def grow(self):
-        self.height += 6
+        self.plant_height += self.growth_rate
+        return self.plant_height
 
-    def days(self):
-        self.age += 6
+    def age(self):
+        self.plant_days += 1
+        return self.plant_days
 
-    def get_info(self):
-        print(f"{self.name.capitalize()}: {self.height}cm, "
-              f"{self.age} days old")
+    def pass_one_day(self):
+        self.grow()
+        self.age()
+
+    def show(self):
+        print(f"{self.plant_name.capitalize()}: {self.plant_height:.1f}cm, "
+              f"{self.plant_days} days old")
 
 
-print("=== Day 1 ===")
-rose = Plant("rose", 25, 30)
-rose.get_info()
-print("=== Day 7 ===")
-rose.grow()
-rose.days()
-rose.get_info()
-print("Growth this week: +6cm")
+if __name__ == "__main__":
+    rose = GrowthPlant("rose", 25, 30, 0.8)
+    print("=== Garden Plant Growth ===")
+    intial_height = rose.plant_height
+
+    for i in range(1, 8):
+        print(f"=== Day {i} ===")
+        rose.show()
+        rose.pass_one_day()
+    weekly_growth = rose.plant_height - intial_height
+    print(f"Growth this week: +{weekly_growth:.1f}cm")
