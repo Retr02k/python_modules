@@ -3,50 +3,63 @@ from ex1.ft_garden_data import Plant
 
 
 class GardenSec(Plant):
-    def __init__(self, plant_name: str, plant_height: float, plant_days: int):
+    def __init__(self,
+                 plant_name: str,
+                 plant_height: float,
+                 plant_days: int
+                 ):
         super().__init__(plant_name, plant_height, plant_days)
+        self._plant_height = plant_height
+        self._plant_days = plant_days
 
-    _validate_ = {"plant_height", "plant_days"}
+    def get_height(self):
+        return self._plant_height
 
-    def __setattr__(self, name, value):
-        if name in self._validate_ and value <= 0:
-            raise ValueError(f"{self.plant_name}: Error: "
-                             f"{name} can't be negative")
-        super().__setattr__(name, value)
+    def set_height(self, new_value):
+        if new_value <= 0:
+            raise ValueError(f"{self.plant_name}: Error, height "
+                             f"can't be negative\nHeight update rejected")
+        self._plant_height = new_value
+
+    def get_age(self):
+        return self._plant_days
+
+    def set_age(self, new_value):
+        if new_value <= 0:
+            raise ValueError(f"{self.plant_name}: Error, age "
+                             f"can't be negative\nAge update rejected")
+        self._plant_days = new_value
+
+    def show(self):
+        print(f"Plant created: {self.plant_name.capitalize()}: "
+              f"{self._plant_height}cm, {self._plant_days} days old")
 
 
 if __name__ == "__main__":
     flowers = [
-        ("rose", 15, 10),
+        ("rose", 15, 30),
         ("cactus", 30, 40),
-        ("sunflower", 100, 35)
+        ("sunflower", 50.5, 25)
     ]
 
     attempt_list = [
-        ("plant_height", 25, "Height updated: {}cm",
-         "Height update rejected!"),
-        ("plant_days", 30, "Age updated: {} days",
-         "Age update rejected!"),
+        ("set_height", -40, "Height updated: {}cm"),
+        ("set_age", -30, "Age updated: {} days")
     ]
 
-    print("=== Garden Security System ===")
     obj = [GardenSec(*i) for i in flowers]
-
-    for plant in obj:
-        print(
-            f"Plant created: {plant.plant_name.capitalize()}: "
-            f"{plant.plant_height:.1f}cm, {plant.plant_days} days old"
-        )
-
-        for attr_name, value, succ_text, rej_text in attempt_list:
+    print("=== Garden Security System ===")
+    for flower_item in obj:
+        flower_item.show()
+        for method_name, value, succ_text in attempt_list:
             try:
-                setattr(plant, attr_name, value)
+                method = getattr(flower_item, method_name)
+                method(value)
                 print(succ_text.format(value))
             except ValueError as err:
                 print(err)
-                print(rej_text)
 
         print(
-            f"Current state: {plant.plant_name.capitalize()}: "
-            f"{plant.plant_height:.1f}cm, {plant.plant_days} days old\n"
+            f"Current state: {flower_item.plant_name.capitalize()}: "
+            f"{flower_item.get_height()}cm, {flower_item.get_age()} days old\n"
         )

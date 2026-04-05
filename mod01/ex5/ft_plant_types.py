@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-
 from ex4.ft_garden_security import GardenSec
 
 
