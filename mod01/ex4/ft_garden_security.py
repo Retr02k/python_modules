@@ -56,8 +56,8 @@ if __name__ == "__main__":
                 method = getattr(flower_item, method_name)
                 method(value)
                 print(succ_text.format(value))
-            except ValueError as err:
-                print(err)
+            except ValueError as error_message:
+                print(error_message)
 
         print(
             f"Current state: {flower_item.plant_name.capitalize()}: "
