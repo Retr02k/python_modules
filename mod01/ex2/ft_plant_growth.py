@@ -3,8 +3,12 @@ from ex1.ft_garden_data import Plant
 
 
 class GrowthPlant(Plant):
-    def __init__(self, plant_name: str, plant_height: float, plant_days: int,
-                 growth_rate: float):
+    def __init__(self,
+                 plant_name: str,
+                 plant_height: float,
+                 plant_days: int,
+                 growth_rate: float
+                 ):
         super().__init__(plant_name, plant_height, plant_days)
         self.growth_rate = growth_rate
 
