@@ -22,7 +22,7 @@ class Plant:
         self.plant_height = plant_height
         self.plant_days = plant_days
         self.growth_rate = growth_rate
-        self._stats = Plant.Stats()
+        self._stats: Plant.Stats = Plant.Stats()
 
     def grow(self) -> None:
         self._stats.grow_calls += 1
@@ -125,7 +125,7 @@ class Tree(Plant):
                  ) -> None:
         super().__init__(plant_name, plant_height, plant_days, growth_rate)
         self.trunk_diameter = trunk_diameter
-        self._stats = Tree.Stats()
+        self._stats: Tree.Stats = Tree.Stats()
 
     def produce_shade(self) -> None:
         self._stats.shade_calls += 1
