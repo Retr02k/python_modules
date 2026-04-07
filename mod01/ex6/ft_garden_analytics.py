@@ -3,12 +3,12 @@
 
 class Plant:
     class Stats:
-        def __init__(self):
+        def __init__(self) -> None:
             self.grow_calls = 0
             self.age_calls = 0
             self.show_calls = 0
 
-        def display(self):
+        def display(self) -> None:
             print(f"Stats: {self.grow_calls} grow, {self.age_calls} age, "
                   f"{self.show_calls} show")
 
@@ -17,35 +17,35 @@ class Plant:
                  plant_height: float,
                  plant_days: int,
                  growth_rate: float = 0.0
-                 ):
+                 ) -> None:
         self.plant_name = plant_name
         self.plant_height = plant_height
         self.plant_days = plant_days
         self.growth_rate = growth_rate
         self._stats = Plant.Stats()
 
-    def grow(self):
+    def grow(self) -> None:
         self._stats.grow_calls += 1
         self.plant_height += self.growth_rate
 
-    def age(self):
+    def age(self) -> None:
         self._stats.age_calls += 1
         self.plant_days += 10
 
-    def print_info(self):
+    def print_info(self) -> None:
         print(f"{self.plant_name.capitalize()}: {self.plant_height:.1f}cm, "
               f"{self.plant_days} days old")
 
-    def show(self):
+    def show(self) -> None:
         self._stats.show_calls += 1
         self.print_info()
 
     @classmethod
-    def placeholder(cls, plant_name):
+    def placeholder(cls, plant_name: str) -> "Plant":
         return cls(plant_name, 0.0, 0, 0.0)
 
     @staticmethod
-    def is_year_old(age):
+    def is_year_old(age: int) -> str:
         return f"Is {age} days more than a year? -> {age > 365}"
 
 
@@ -56,7 +56,7 @@ class Flower(Plant):
                  plant_days: int,
                  color: str,
                  growth_rate: float = 0.0
-                 ):
+                 ) -> None:
         super().__init__(plant_name,
                          plant_height,
                          plant_days,
@@ -64,13 +64,13 @@ class Flower(Plant):
                          )
         self.color = color
 
-    def bloom(self):
+    def bloom(self) -> None:
         if self._stats.age_calls > 0:
             print(f"{self.plant_name.capitalize()} is blooming beautifully!")
         else:
             print(f"{self.plant_name.capitalize()} has not bloomed yet")
 
-    def show(self):
+    def show(self) -> None:
         super().show()
         print(f"Color: {self.color}")
         self.bloom()
@@ -83,7 +83,7 @@ class Seed(Flower):
                  plant_days: int,
                  color: str,
                  growth_rate: float = 0.0
-                 ):
+                 ) -> None:
         super().__init__(plant_name,
                          plant_height,
                          plant_days,
@@ -92,7 +92,7 @@ class Seed(Flower):
                          )
         self.seeds = 0
 
-    def show(self):
+    def show(self) -> None:
         super().show()
         print(f"Seeds: {self.seeds}")
         print("[make sunflower grow, age and bloom]")
@@ -108,11 +108,11 @@ class Seed(Flower):
 
 class Tree(Plant):
     class Stats(Plant.Stats):
-        def __init__(self):
+        def __init__(self) -> None:
             super().__init__()
             self.shade_calls = 0
 
-        def display(self):
+        def display(self) -> None:
             print(f"Stats: {self.grow_calls} grow, {self.age_calls} age, "
                   f"{self.show_calls} show, {self.shade_calls} shade")
 
@@ -122,18 +122,18 @@ class Tree(Plant):
                  plant_days: int,
                  trunk_diameter: float,
                  growth_rate: float = 0.0
-                 ):
+                 ) -> None:
         super().__init__(plant_name, plant_height, plant_days, growth_rate)
         self.trunk_diameter = trunk_diameter
         self._stats = Tree.Stats()
 
-    def produce_shade(self):
+    def produce_shade(self) -> None:
         self._stats.shade_calls += 1
         print(f"Tree {self.plant_name.capitalize()} now produces a shade of "
               f"{self.plant_height:.1f}cm long "
               f"and {self.trunk_diameter:.1f}cm wide.")
 
-    def show(self):
+    def show(self) -> None:
         super().show()
         print(f"Trunk diameter: {self.trunk_diameter:.1f}cm")
         display_stats(self)
@@ -142,7 +142,7 @@ class Tree(Plant):
         display_stats(self)
 
 
-def display_stats(plant):
+def display_stats(plant: Plant) -> None:
     print(f"[statistics for {plant.plant_name.capitalize()}]")
     plant._stats.display()
 

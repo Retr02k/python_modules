@@ -7,30 +7,30 @@ class GardenSec(Plant):
                  plant_name: str,
                  plant_height: float,
                  plant_days: int
-                 ):
+                 ) -> None:
         super().__init__(plant_name, plant_height, plant_days)
         self._plant_height = plant_height
         self._plant_days = plant_days
 
-    def get_height(self):
+    def get_height(self) -> float:
         return self._plant_height
 
-    def set_height(self, new_value):
+    def set_height(self, new_value: float) -> None:
         if new_value <= 0:
             raise ValueError(f"{self.plant_name}: Error, height "
                              f"can't be negative\nHeight update rejected")
         self._plant_height = new_value
 
-    def get_age(self):
+    def get_age(self) -> int:
         return self._plant_days
 
-    def set_age(self, new_value):
+    def set_age(self, new_value: int) -> None:
         if new_value <= 0:
             raise ValueError(f"{self.plant_name}: Error, age "
                              f"can't be negative\nAge update rejected")
         self._plant_days = new_value
 
-    def show(self):
+    def show(self) -> None:
         print(f"Plant created: {self.plant_name.capitalize()}: "
               f"{self._plant_height}cm, {self._plant_days} days old")
 
