@@ -20,30 +20,29 @@ class WaterError(GardenError):
         super().__init__(error_message)
 
 
-if __name__ == "__main__":
-    print("=== Custom Garden Errors Demo ===")
+print("=== Custom Garden Errors Demo ===")
 
-    print("Testing PlantError...")
-    try:
-        raise PlantError("The tomato plant is wilting!")
-    except PlantError as e:
-        print(f"Caught PlantError: {e}")
+print("\nTesting PlantError...")
+try:
+    raise PlantError("The tomato plant is wilting!")
+except PlantError as error_message:
+    print(f"Caught PlantError: {error_message}\n")
 
-    print("Testing WaterError...")
-    try:
-        raise WaterError("Not enough water in the tank!")
-    except WaterError as e:
-        print(f"Caught WaterError: {e}")
+print("Testing WaterError...")
+try:
+    raise WaterError("Not enough water in the tank!")
+except WaterError as error_message:
+    print(f"Caught WaterError: {error_message}\n")
 
-    print("Testing catching all garden errors...")
-    try:
-        raise PlantError("The tomato plant is wilting!")
-    except GardenError as e:
-        print(f"Caught GardenError: {e}")
+print("Testing catching all garden errors...")
+try:
+    raise PlantError
+except GardenError as error_message:
+    print(f"Caught GardenError: {error_message}")
 
-    try:
-        raise WaterError("Not enough water in the tank!")
-    except GardenError as e:
-        print(f"Caught GardenError: {e}")
+try:
+    raise WaterError
+except GardenError as error_message:
+    print(f"Caught GardenError: {error_message}\n")
 
-    print("All custom error types work correctly!")
+print("All custom error types work correctly!")
