@@ -1,9 +1,12 @@
 #!/usr/bin/env python3.14
+from typing import Callable
+
+
 def input_temperature(temp_str: str) -> int:
     return (int(temp_str))
 
 
-def test_temperature(func, value) -> None:
+def test_temperature(func: Callable[[str], int], value: str) -> None:
     print("=== Garden Temperature ===")
     try:
         print(f"Input data is '{value}'")

@@ -16,7 +16,7 @@ def garden_operations(operation_number: int) -> None:
 
 def test_error_types() -> None:
     print("=== Garden Error Types Demo ===")
-    error_list = [
+    error_list: list[tuple[type[Exception], int]] = [
         (ValueError, 0),
         (ZeroDivisionError, 1),
         (FileNotFoundError, 2),
