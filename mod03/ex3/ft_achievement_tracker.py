@@ -2,19 +2,19 @@
 from random import sample
 
 
-def random_insert(achievements):
+def random_insert(achievements: list[str]) -> list[str]:
     return (sample(achievements, 5))
 
 
-def gen_player_achievements(achievements) -> set:
+def gen_player_achievements(achievements: list[str]) -> set[str]:
     return (set(random_insert(achievements)))
 
 
-def analysis(players, achievements):
+def analysis(players: dict[str, set[str]], achievements: list[str]) -> None:
     print(f"\nCommon achievements: {set.intersection(*players.values())}\n")
 
     for player_name, player_set in players.items():
-        excluding_player = set()
+        excluding_player: set[str] = set()
         for other_name, other_set in players.items():
             if other_name != player_name:
                 excluding_player = excluding_player.union(other_set)
@@ -28,35 +28,36 @@ def analysis(players, achievements):
         print(f"{missing_name} is missing: {missing}")
 
 
-def main():
-    print("=== Achievement tracker system ===")
-    players = {
-              "Alice": set(),
-              "Bob": set(),
-              "Charlie": set(),
-              "Dylan": set()
-              }
+if __name__ == "__main__":
 
-    achievements = [
-                   "Crafting Genius",
-                   "Strategist",
-                   "World Savior",
-                   "Speed Runner",
-                   "Survivor",
-                   "Master Explorer",
-                   "Treasure Hunter",
-                   "Unstoppable",
-                   "First steps",
-                   "Collector Supreme",
-                   "Untouchable",
-                   "Sharp Mind",
-                   "Boss Slayer"
-                   ]
+    def main() -> None:
+        print("=== Achievement tracker system ===")
+        players: dict[str, set[str]] = {
+                "Alice": set(),
+                "Bob": set(),
+                "Charlie": set(),
+                "Dylan": set()
+                }
 
-    for player_name in players:
-        players[player_name] = gen_player_achievements(achievements)
-        print(f"Player {player_name}: {players[player_name]}")
-    analysis(players, achievements)
+        achievements: list[str] = [
+                       "Crafting Genius",
+                       "Strategist",
+                       "World Savior",
+                       "Speed Runner",
+                       "Survivor",
+                       "Master Explorer",
+                       "Treasure Hunter",
+                       "Unstoppable",
+                       "First steps",
+                       "Collector Supreme",
+                       "Untouchable",
+                       "Sharp Mind",
+                       "Boss Slayer"
+                       ]
 
+        for player_name in players:
+            players[player_name] = gen_player_achievements(achievements)
+            print(f"Player {player_name}: {players[player_name]}")
+        analysis(players, achievements)
 
-main()
+    main()
