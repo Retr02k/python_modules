@@ -31,19 +31,18 @@ def analysis(inventory: dict[str, int]) -> None:
     item_count = len(inventory.keys())
     quantity_count = sum(inventory.values())
     percentage_list = {}
+    max_value = max(inventory.values())
+    min_value = min(inventory.values())
     print(f"Total quantity of the {item_count} items: {quantity_count}")
     for item in inventory:
         item_percentage = ((inventory[item] / quantity_count) * 100)
         percentage_list[item] = inventory[item]
         print(f"Item {item} represents {round(item_percentage, 1)}%")
 
-    percentage_list = inventory.items()
-    max_value = max(inventory.values())
-    min_value = min(inventory.values())
-    for key, value in percentage_list:
-        if inventory[key] == max_value:
+    for key in percentage_list:
+        if percentage_list[key] == max_value:
             print(f"Item most abundant: {key} with quantity {max_value}")
-        elif inventory[key] == min_value:
+        elif percentage_list[key] == min_value:
             print(f"Item least abundant: {key} with quantity {min_value}")
 
 
