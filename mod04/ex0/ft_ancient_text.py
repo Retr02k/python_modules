@@ -4,11 +4,11 @@ import sys
 
 if __name__ == "__main__":
     def main():
-        print("=== Cyber Archives Recovery ===")
-        if len(sys.argv) <= 1:
+        if len(sys.argv) < 2:
             print("Usage: ft_ancient_text.py <file>")
         else:
             try:
+                print("=== Cyber Archives Recovery ===")
                 print(f"Accessing file: {sys.argv[1]}")
                 open_file = open(str(sys.argv[1]), "r")
                 content = open_file.read()
