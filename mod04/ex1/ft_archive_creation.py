@@ -15,7 +15,9 @@ if __name__ == "__main__":
                 print(file_read)
                 open_file.close()
                 print(f"---\nFile '{sys.argv[1]}' closed.\n")
-            except (FileNotFoundError, PermissionError, Exception) as error_message:
+            except (FileNotFoundError,
+                    PermissionError,
+                    Exception) as error_message:
                 print(f"Error opening file {sys.argv[1]}: {error_message}")
             try:
                 print("Transform data:\n---\n")
@@ -27,7 +29,8 @@ if __name__ == "__main__":
                             break
                         print(f"{line[:-1]}#")
                         temp_file.append(line[:-1] + "#\n")
-                file_to_write_to = input("\n---\nEnter new file name (or empty): ")
+                file_to_write_to = input("\n---\nEnter new file "
+                                         "name (or empty): ")
                 if not file_to_write_to:
                     print("Not saving data")
                     return
@@ -37,9 +40,9 @@ if __name__ == "__main__":
                 print(f"Saving data to '{file_to_write_to}'")
                 print(f"Data saved in file '{file_to_write_to}'.")
                 new_file.close()
-            except (FileNotFoundError, PermissionError, Exception) as error_message:
+            except (FileNotFoundError,
+                    PermissionError,
+                    Exception) as error_message:
                 print(f"Error opening file {sys.argv[1]}: {error_message}")
 
     main()
-
-
