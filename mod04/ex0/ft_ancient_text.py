@@ -4,7 +4,7 @@ import sys
 
 if __name__ == "__main__":
     def main():
-        if len(sys.argv) < 2:
+        if len(sys.argv) != 2:
             print("Usage: ft_ancient_text.py <file>")
         else:
             try:
@@ -15,7 +15,9 @@ if __name__ == "__main__":
                 print(content)
                 print(f"File {str(sys.argv[1])} closed")
                 open_file.close()
-            except (FileNotFoundError, PermissionError, Exception) as error_message:
+            except (FileNotFoundError,
+                    PermissionError,
+                    Exception) as error_message:
                 print(f"Error opening file {sys.argv[1]}: {error_message}")
 
     main()

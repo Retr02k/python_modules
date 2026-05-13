@@ -4,7 +4,7 @@ import sys
 
 if __name__ == "__main__":
     def main() -> None:
-        if len(sys.argv) < 2:
+        if len(sys.argv) != 2:
             print("Usage: ft_ancient_text.py <file>")
         else:
             print("=== Cyber Archives Recovery & Preservation ===")
@@ -18,7 +18,7 @@ if __name__ == "__main__":
             except (FileNotFoundError,
                     PermissionError,
                     Exception) as error_message:
-                print(f"Error opening file {sys.argv[1]}: {error_message}")
+                print(f"\nError opening file {sys.argv[1]}: {error_message}")
             try:
                 print("Transform data:\n---\n")
                 temp_file = []
@@ -42,7 +42,9 @@ if __name__ == "__main__":
                 new_file.close()
             except (FileNotFoundError,
                     PermissionError,
-                    Exception) as error_message:
-                print(f"Error opening file {sys.argv[1]}: {error_message}")
+                    Exception,
+                    EOFError,
+                    KeyboardInterrupt) as error_message:
+                print(error_message)
 
     main()

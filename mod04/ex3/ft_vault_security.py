@@ -24,12 +24,15 @@ if __name__ == "__main__":
     def main() -> None:
         print("Using 'secure_archive' to read from a nonexistent file:")
         print(secure_archive("i_do_not_exist", "read"))
+        print()
         print("Using 'secure_archive' to read from an inaccessible file:")
         print(secure_archive("/etc/master.passwd", "read"))
+        print()
         print("Using 'secure_archive' to read from a regular file:")
         print(secure_archive("ancient_fragment.txt", "read"))
+        print()
         print("Using 'secure_archive' to write previous "
               "content to a new file:")
-        print(secure_archive("gabriel", "write", "oblivion"))
+        print(secure_archive("gabriel", "write", "ancient_fragment.txt"))
 
 main()
