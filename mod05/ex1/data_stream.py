@@ -1,10 +1,101 @@
 #!/usr/bin/env python3
+from abc import ABC, abstractmethod
+from typing import Any
 
-from ex0.data_processor import (DataProcessor,
-                                NumericProcessor,
-                                TextProcessor,
-                                LogProcessor)
-import typing
+
+class DataProcessor(ABC):
+    def __init__(self) -> None:
+        super().__init__()
+        self.storage: list[tuple[int, str]] = []
+        self.counter: int = -1
+
+    @abstractmethod
+    def validate(self, data: Any) -> bool:
+        pass
+
+    @abstractmethod
+    def ingest(self, data: Any) -> None:
+        pass
+
+    def output(self) -> tuple[int, str]:
+        if not self.storage:
+            raise ValueError("Storage is empty")
+        return self.storage.pop(0)
+
+
+class NumericProcessor(DataProcessor):
+    def __init__(self) -> None:
+        super().__init__()
+
+    def validate(self, data: Any) -> bool:
+        if isinstance(data, (int, float)):
+            return True
+        elif isinstance(data, list):
+            return all(isinstance(element, (int, float)) for element in data)
+        return False
+
+    def ingest(self, data: int | float | list[int | float]) -> None:
+        if not self.validate(data):
+            raise ValueError("Invalid data")
+        else:
+            if isinstance(data, list):
+                for item in data:
+                    self.counter += 1
+                    self.storage.append((self.counter, str(item)))
+            else:
+                self.counter += 1
+                self.storage.append((self.counter, str(data)))
+
+
+class TextProcessor(DataProcessor):
+    def __init__(self) -> None:
+        super().__init__()
+
+    def validate(self, data: Any) -> bool:
+        if isinstance(data, str):
+            return True
+        elif isinstance(data, list):
+            return all(isinstance(element, str) for element in data)
+        return False
+
+    def ingest(self, data: str | list[str]) -> None:
+        if not self.validate(data):
+            raise ValueError("Invalid data")
+        else:
+            if isinstance(data, list):
+                for item in data:
+                    self.counter += 1
+                    self.storage.append((self.counter, str(item)))
+            else:
+                self.counter += 1
+                self.storage.append((self.counter, str(data)))
+
+
+class LogProcessor(DataProcessor):
+    def __init__(self) -> None:
+        super().__init__()
+
+    def validate(self, data: Any) -> bool:
+        if isinstance(data, dict):
+            return all(isinstance(key, str) for key in data.keys())
+        elif isinstance(data, list):
+            return all(isinstance(element, dict)
+                       and all(isinstance(key, str)
+                               for key in element.keys())
+                       for element in data)
+        return False
+
+    def ingest(self, data: dict[str, Any]) -> None:
+        if not self.validate(data):
+            raise ValueError("Invalid data")
+        else:
+            if isinstance(data, list):
+                for item in data:
+                    self.counter += 1
+                    self.storage.append((self.counter, str(item)))
+            else:
+                self.counter += 1
+                self.storage.append((self.counter, str(data)))
 
 
 class DataStream:
@@ -14,7 +105,7 @@ class DataStream:
     def register_processor(self, proc: DataProcessor) -> None:
         self.processors.append(proc)
 
-    def process_stream(self, stream: list[typing.Any]) -> None:
+    def process_stream(self, stream: list[Any]) -> None:
         for element in stream:
             processed = False
             for processor in self.processors:
