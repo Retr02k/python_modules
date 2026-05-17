@@ -1,3 +1,3 @@
-import alchemy.elements
+from alchemy.elements import create_air
 
-print(alchemy.elements.create_air())
+print(create_air())

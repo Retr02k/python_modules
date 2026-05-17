@@ -1,4 +1,4 @@
-from alchemy import potions
+from alchemy.potions import healing_potion, strength_potion
 
-print(potions.healing_potion())
-print(potions.strength_potion())
+print(healing_potion())
+print(strength_potion())
