@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import elements
 print("=== Alembic 0 ===")
 print("Using: 'import elements' structure to access elements.py")

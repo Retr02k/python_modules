@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import alchemy.elements
 from elements import create_water, create_fire
 

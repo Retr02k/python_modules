@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 from elements import create_water
 print("=== Alembic 1 ===")
 print("Using: 'from elements import create_water' "

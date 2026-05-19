@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 from alchemy import grimoire
 
 print("=== Kaboom 0 ===")
