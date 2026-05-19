@@ -2,6 +2,6 @@ def validate_ingredients(ingredients: str) -> str:
     from .light_spellbook import light_spell_allowed_ingredients
     allowed = light_spell_allowed_ingredients()
     for allowed_ingredient in allowed:
-        if allowed_ingredient.lower() == ingredients.lower():
-            return f"{ingredients} -> VALID"
-    return f"{ingredients} -> INVALID"
+        if allowed_ingredient.lower() in ingredients.lower():
+            return f"{ingredients} - VALID"
+    return f"{ingredients} - INVALID"
