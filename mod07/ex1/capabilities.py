@@ -4,15 +4,15 @@ from ex0.creatures import Creature
 
 class HealCapability(ABC):
     @abstractmethod
-    def heal(self, target: Creature) -> str:
+    def heal(self, target: Creature | None = None) -> str:
         pass
 
 
 class TransformCapability(ABC):
-    def __init__(self, transformed: bool=False):
+    def __init__(self, transformed: bool = False):
         self.transformed = transformed
         super().__init__()
-    
+
     @abstractmethod
     def transform(self) -> str:
         pass

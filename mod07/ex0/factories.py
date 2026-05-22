@@ -1,17 +1,18 @@
 from abc import ABC, abstractmethod
-from .creatures import (Flameling,
-                       Pyrodon,
-                       Aquabub,
-                       Torragon)
+from .creatures import (Creature,
+                        Flameling,
+                        Pyrodon,
+                        Aquabub,
+                        Torragon)
 
 
 class CreatureFactory(ABC):
     @abstractmethod
-    def create_base():
+    def create_base(self) -> Creature:
         pass
 
     @abstractmethod
-    def create_evolved():
+    def create_evolved(self) -> Creature:
         pass
 
 

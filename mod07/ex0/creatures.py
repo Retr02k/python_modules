@@ -7,7 +7,7 @@ class Creature(ABC):
         self.type = type
 
     @abstractmethod
-    def attack(self):
+    def attack(self) -> str:
         pass
 
     def describe(self) -> str:
