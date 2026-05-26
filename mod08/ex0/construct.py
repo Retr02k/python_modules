@@ -4,28 +4,19 @@ import os
 import site
 
 
-def is_virtual_environment():
-    """
-    Detect if Python is running inside a virtual environment.
-    """
+def is_virtual_environment() -> bool:
     return (
         hasattr(sys, "real_prefix")
         or sys.prefix != sys.base_prefix
     )
 
 
-def get_venv_name():
-    """
-    Return the virtual environment folder name.
-    """
+def get_venv_name() -> str:
     return os.path.basename(sys.prefix)
 
 
-def get_site_packages():
-    """
-    Return the current site-packages path.
-    """
-    paths = site.getsitepackages()
+def get_site_packages() -> str:
+    paths: list[str] = site.getsitepackages()
 
     if paths:
         return paths[0]
@@ -33,8 +24,8 @@ def get_site_packages():
     return "Unknown"
 
 
-def main():
-    python_path = sys.executable
+def main() -> None:
+    python_path: str = sys.executable
 
     if is_virtual_environment():
         print("\nMATRIX STATUS: Welcome to the construct\n")
@@ -56,7 +47,7 @@ def main():
         print("To enter the construct, run:")
         print("python -m venv matrix_env")
         print("source matrix_env/bin/activate # On Unix")
-        print("matrix_env\Scripts\\activate # On Windows\n")
+        print("matrix_env\\Scripts\\activate # On Windows\n")
         print("Then run this program again.")
 
 
