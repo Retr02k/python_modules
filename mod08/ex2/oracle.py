@@ -18,7 +18,10 @@ def is_missing(value: str | None) -> bool:
     return value is None or value == ""
 
 
-def load_configuration() -> tuple[dict[str, str | None], str | None, str | None, bool]:
+def load_configuration() -> tuple[dict[str, str | None],
+                                  str | None,
+                                  str | None,
+                                  bool]:
     mode_env = getenv("MATRIX_MODE")
     dotenv_loaded = False
     if mode_env != "production":

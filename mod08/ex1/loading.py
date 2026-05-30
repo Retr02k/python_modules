@@ -2,9 +2,10 @@
 
 import importlib
 import sys
+from types import ModuleType
 
 
-def check_dependencies():
+def check_dependencies() -> dict[str, ModuleType]:
     packages = {
         "pandas": "Data manipulation ready",
         "numpy": "Numerical computation ready",
@@ -32,7 +33,7 @@ def check_dependencies():
     return loaded_modules
 
 
-def main():
+def main() -> None:
     print("\nLOADING STATUS: Loading programs...\n")
 
     modules = check_dependencies()
