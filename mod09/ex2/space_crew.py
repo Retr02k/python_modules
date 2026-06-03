@@ -2,8 +2,12 @@
 from __future__ import annotations
 from datetime import datetime
 from enum import Enum
+import json
+from pathlib import Path
+import sys
 from pydantic import (BaseModel,
                       Field,
+                      ValidationError,
                       model_validator)
 
 
@@ -66,7 +70,34 @@ class SpaceMission(BaseModel):
         return self
 
 
+def run_generated_data_checks() -> None:
+    base_dir = Path(__file__).resolve().parents[1]
+    data_dir = base_dir / "generated_data"
+    if not data_dir.exists():
+        print("generated_data folder not found. Run data_exporter.py first.")
+        return
+
+    file_path = data_dir / "space_missions.json"
+    if not file_path.exists():
+        print("Missing space_missions.json.")
+        return
+
+    items = json.loads(file_path.read_text())
+    ok = 0
+    errors = 0
+    for item in items:
+        try:
+            SpaceMission(**item)
+            ok += 1
+        except ValidationError:
+            errors += 1
+    print(f"space_missions.json: {ok} valid, {errors} errors")
+
+
 def main() -> None:
+    if "--generated-data" in sys.argv:
+        run_generated_data_checks()
+        return
     print("Space Mission Crew Validation")
     print("======================================")
 
