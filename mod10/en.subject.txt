@@ -1,0 +1,451 @@
+Chapter V
+Exercise 0: Lambda Sanctum
+Exercise0
+ex0
+Directory: ex0/
+Files to Submit: lambda_spells.py
+Authorized: map, filter, sorted, min, max, round, sum, len
+
+For this exercise, you must use lambda expressions for all
+transformations. Do not use the ’def’ keyword to create named
+functions for simple operations, like one-time tasks or easy to read
+operations. The goal is to master anonymous functions and functional
+programming patterns.
+
+The Lambda Sanctum: Mastering Anonymous Functions
+Welcome to the Lambda Sanctum, young mage! Here, the ancient art of anonymous
+functions is taught. Lambda expressions are like quick incantations—short, powerful
+spells that can transform data without the ceremony of full function definitions.
+
+Your Mission: Master the art of lambda expressions by helping the
+Sanctum’s guardian, Sage Lambda, organize magical artifacts using
+anonymous functions. Learn to create functions on-the-fly for data
+transformation.
+
+9
+
+FuncMage
+
+Master the Ancient Arts of Functional Programming
+
+The Challenge
+Create a file lambda_spells.py that contains functions demonstrating lambda mastery:
+Function Signatures:
+def artifact_sorter(artifacts: list[dict]) -> list[dict]
+def power_filter(mages: list[dict], min_power: int) -> list[dict]
+def spell_transformer(spells: list[str]) -> list[str]
+def mage_stats(mages: list[dict]) -> dict
+
+Implementation Requirements
+artifact_sorter(artifacts) - Sort magical artifacts:
+• Use sorted() with a lambda to sort by ’power’ level (descending)
+• Each artifact is a dict: {’name’:
+
+str, ’power’:
+
+int, ’type’:
+
+str}
+
+• Return the sorted list
+power_filter(mages, min_power) - Filter mages by power:
+• Use filter() with a lambda to find mages with power >= min_power
+• Each mage is a dict: {’name’:
+
+str, ’power’:
+
+int, ’element’:
+
+str}
+
+• Return a list of filtered mages
+spell_transformer(spells) - Transform spell names:
+• Use map() with a lambda to add "* " prefix and " *" suffix
+• Input: list of spell names (strings)
+• Return a list of transformed spell names
+mage_stats(mages) - Calculate statistics:
+• Use lambdas with max(), min() to find:
+• Most powerful mage’s power level
+• Least powerful mage’s power level
+• Average power level (rounded to 2 decimals)
+• Return dict: {’max_power’:
+
+int, ’min_power’:
+
+10
+
+int, ’avg_power’:
+
+float}
+
+FuncMage
+
+Master the Ancient Arts of Functional Programming
+
+Expected Output Example:
+$> python3 lambda_spells.py
+Testing artifact sorter...
+Fire Staff (92 power) comes before Crystal Orb (85 power)
+Testing spell transformer...
+* fireball * * heal * * shield *
+
+How do lambda expressions make code more concise?
+use lambda vs. regular function definitions?
+
+11
+
+When should you
+
+Chapter VI
+Exercise 1: Higher Realm
+Exercise1
+ex1
+Directory: ex1/
+Files to Submit: higher_magic.py
+Authorized: callable(), Callable
+
+The Higher Realm: Functions Operating on Functions
+Welcome to the Higher Realm, where functions become the subjects of other functions!
+Here, you’ll learn that functions are first-class citizens—they can be passed as arguments, returned from other functions, and stored in data structures.
+
+Your Mission: Help the Realm’s guardian, Mage Functional, create
+a spell-crafting system where functions can modify, combine, and
+enhance other functions. Master the art of higher-order functions!
+
+The Challenge
+Create a file higher_magic.py that demonstrates higher-order function mastery:
+
+Context
+Every spell in your grimoire follows the same contract:
+def spell(target: str, power: int) -> str
+
+A spell takes a target and a power level and returns a description string of what happened.
+
+12
+
+FuncMage
+
+Master the Ancient Arts of Functional Programming
+
+Examples:
+def heal(target: str, power: int) -> str:
+return f"Heal restores {target} for {power} HP"
+
+If you need inspiration for power values or target, use data_generator.py to get sample
+data.
+The following functions must be implemented: Function Signatures:
+def spell_combiner(spell1: Callable, spell2: Callable) -> Callable
+def power_amplifier(base_spell: Callable, multiplier: int) -> Callable
+def conditional_caster(condition: Callable, spell: Callable) -> Callable
+def spell_sequence(spells: list[Callable]) -> Callable
+
+Implementation Requirements
+spell_combiner(spell1, spell2) - Combine two spells:
+• Return a new function that calls both spells with the same arguments
+• The combined spell should return a tuple of both results
+• Example: combined = spell_combiner(fireball, heal)
+power_amplifier(base_spell, multiplier) - Amplify spell power:
+• Returns a function with the same signature as the original spell
+• Returns a new spell where the power is multiplied before casting.
+• Example: mega_fireball = power_amplifier(fireball, 3)
+conditional_caster(condition, spell) - Cast spell conditionally:
+• Returns a new spell that only casts if a condition is True.
+• If condition fails, return "Spell fizzled"
+• Both condition and spell receive the same arguments
+spell_sequence(spells) - Create spell sequence:
+• Return a function that casts all spells in order
+• Each spell receives the same arguments
+• Returns a list of all spell results
+
+13
+
+FuncMage
+
+Master the Ancient Arts of Functional Programming
+
+Short Output Example:
+$> python3 higher_magic.py
+Testing spell combiner...
+Combined spell result: Fireball hits Dragon, Heals Dragon
+Testing power amplifier...
+Original: 10, Amplified: 30
+
+Your program must demonstrate use and efficiency of all your spells modifiers functions,
+
+How do higher-order functions enable code reuse and composition?
+What makes functions "first-class citizens" in Python?
+
+From which package is it recommended to use Callable?
+purpose of callable()?
+
+14
+
+What is the
+
+Chapter VII
+Exercise 2: Memory Depths
+Exercise2
+ex2
+Directory: ex2/
+Files to Submit: scope_mysteries.py
+Authorized: nonlocal
+
+The Memory Depths: Lexical Scoping and Closures
+Deep in the Memory Depths, the ancient secrets of lexical scoping are guarded. Here,
+functions remember the environment where they were created, capturing variables in
+mystical closures that persist beyond their original scope.
+
+Your Mission: Help the Memory Keeper, Sage Closure, understand how
+functions can "remember" variables from their creation environment.
+Master closures and lexical scoping to create persistent magical
+effects!
+
+The Challenge
+Create a file scope_mysteries.py that demonstrates lexical scoping mastery
+Function Signatures:
+def mage_counter() -> Callable
+def spell_accumulator(initial_power: int) -> Callable
+def enchantment_factory(enchantment_type: str) -> Callable
+def memory_vault() -> dict[str, Callable]
+
+15
+
+FuncMage
+
+Master the Ancient Arts of Functional Programming
+
+Implementation Requirements
+mage_counter() - Create a counting closure:
+• Return a function that counts how many times it’s been called
+• Each call should return the current count (starting from 1)
+• The counter should persist between calls
+• Creating two separate counters must yield independent state.
+• Use closure to maintain state without global variables
+spell_accumulator(initial_power) - Create power accumulator:
+• Return a function that accumulates power over time
+• Each call adds the given amount to the total power
+• Return the new total power after each addition
+• Start with initial_power as the base
+enchantment_factory(enchantment_type) - Create enchantment functions:
+• Return a function that applies the specified enchantment
+• The returned function takes an item name and returns enchanted description
+• Format: "enchantment_type item_name" (e.g., "Flaming Sword")
+• Each factory creates functions with different enchantment types
+memory_vault() - Create a memory management system:
+• Return a dict with ’store’ and ’recall’ functions
+• ’store’ function: takes (key, value) and stores the memory
+• ’recall’ function: takes (key) and returns stored value or "Memory not found"
+• Use closure to maintain private memory storage
+
+16
+
+FuncMage
+
+Master the Ancient Arts of Functional Programming
+
+Expected Output Example:
+$> python3 scope_mysteries.py
+Testing mage counter...
+counter_a call 1: 1
+counter_a call 2: 2
+counter_b call 1: 1
+Testing spell accumulator...
+Base 100, add 20: 120
+Base 100, add 30: 150
+Testing enchantment factory...
+Flaming Sword
+Frozen Shield
+Testing memory vault...
+Store 'secret' = 42
+Recall 'secret': 42
+Recall 'unknown': Memory not found
+
+How do closures enable functions to "remember" their creation
+environment? What are the benefits of lexical scoping in functional
+programming?
+
+Why is global forbidden, but nonlocal allowed?
+differences?
+
+17
+
+What are the key
+
+Chapter VIII
+Exercise 3: Ancient Library
+Exercise3
+ex3
+Directory: ex3/
+Files to Submit: functools_artifacts.py
+Authorized: functools, operator
+
+The Ancient Library: Functools Treasures
+In the Ancient Library, the most powerful functional programming artifacts are stored.
+The functools module contains legendary tools: reduce, partial, wraps, and more.
+These artifacts can transform how you approach complex problems.
+
+Your Mission: Help the Library’s curator, Archivist Functools,
+catalog and demonstrate the power of these ancient artifacts. Learn
+to wield reduce, partial, and other functools treasures!
+
+The Challenge
+Create a file functools_artifacts.py that demonstrates functools mastery
+Function Signatures:
+def spell_reducer(spells: list[int], operation: str) -> int
+def partial_enchanter(base_enchantment: Callable) -> dict[str, Callable]
+def memoized_fibonacci(n: int) -> int
+def spell_dispatcher() -> Callable[[Any], str]
+
+18
+
+FuncMage
+
+Master the Ancient Arts of Functional Programming
+
+Implementation Requirements
+spell_reducer(spells, operation) - Reduce spell powers:
+• Use functools.reduce to combine all spell powers
+• Support operations: "add", "multiply", "max", "min"
+• Use operator module functions (add, mul, etc.)
+• Return the final reduced value
+• If spells is empty, return 0
+• If operation is unknown, properly handle the error
+partial_enchanter(base_enchantment) - Create partial applications:
+• Take a base enchantment function with signature (power: int, element: str, target:
+str) -> str
+• Use functools.partial to create 3 specialized versions
+• Each version pre-filling power=50 and the element
+memoized_fibonacci(n) - Cached fibonacci:
+• Use functools.lru_cache decorator for memoization
+• Implement fibonacci sequence calculation
+• Function should return the nth Fibonacci number
+• The cache should improve performance for repeated calls
+• Return the nth fibonacci number
+
+You can verify caching works via memoized_fibonacci.cache_info().
+
+spell_dispatcher() - Create single dispatch system:
+• Use decorator functools.singledispatch to create a spell system
+• The base function receives Any and handles unknown spell type
+• Handle different types: int (damage spell), str (enchantment), list (multi-cast)
+• Return the dispatcher function
+• Each type should have appropriate spell behavior
+
+19
+
+FuncMage
+
+Master the Ancient Arts of Functional Programming
+
+Expected Output Example:
+$> python3 functools_artifacts.py
+Testing spell reducer...
+Sum: 100
+Product: 240000
+Max: 40
+Testing memoized fibonacci...
+Fib(0): 0
+Fib(1): 1
+Fib(10): 55
+Fib(15): 610
+Testing spell dispatcher...
+Damage spell: 42 damage
+Enchantment: fireball
+Multi-cast: 3 spells
+Unknown spell type
+
+How does functools.reduce enable powerful data aggregation?
+are the performance benefits of memoization with lru_cache?
+
+20
+
+What
+
+Chapter IX
+Exercise 4: Master’s Tower
+Exercise4
+ex4
+Directory: ex4/
+Files to Submit: decorator_mastery.py
+Authorized: functools.wraps, staticmethod
+
+The Master’s Tower: Decorator Mastery and Class Methods
+At the pinnacle of your journey lies the Master’s Tower, where the most advanced Function Mages learn to create decorators—magical wrappers that can transform any function’s behavior. Here, you’ll also master @staticmethod and understand how decorators
+work with classes.
+
+Your Mission: Prove your mastery to the Tower’s guardian,
+Grandmaster Decorator, by creating powerful decorators that can
+enhance any spell or method. This is your final test as a Function
+Mage!
+
+The Challenge
+Create a file decorator_mastery.py that demonstrates decorator mastery: Function
+Signatures:
+def spell_timer(func: Callable) -> Callable
+def power_validator(min_power: int) -> Callable
+def retry_spell(max_attempts: int) -> Callable
+class MageGuild:
+@staticmethod
+def validate_mage_name(name: str) -> bool
+def cast_spell(self, spell_name: str, power: int) -> str
+
+21
+
+FuncMage
+
+Master the Ancient Arts of Functional Programming
+
+Implementation Requirements
+spell_timer(func) - Time execution decorator:
+• Create a decorator that measures function execution time
+• Print "Casting function_name..." before execution
+• Print "Spell completed in X.XXX seconds" after execution (3 decimal places)
+• Use functools.wraps to preserve original function metadata
+• Return the original function’s result
+power_validator(min_power) - Parameterized validation decorator:
+• Create a decorator factory that validates power levels
+• Applied on a standalone function
+• If power is valid (>= min_power), execute the function normally
+• If invalid, return "Insufficient power for this spell"
+• Use functools.wraps properly
+retry_spell(max_attempts) - Retry decorator:
+• Create a decorator that retries failed spells
+• If function raises an exception, retry up to max_attempts times
+• Print "Spell failed, retrying... (attempt n/max_attempts)"
+• If all attempts fail, return "Spell casting failed after max_attempts attempts"
+• If one attempt succeeds, return its result normally
+MageGuild class - Demonstrate staticmethod:
+• validate_mage_name(name) - Static method that checks if name is valid
+• Name is valid if it’s at least 3 characters and contains only letters/spaces
+• cast_spell(self, spell_name, power) - Instance method
+• Should use the power_validator decorator with min_power=10
+• When power is valid, return "Successfully cast spell_name with <power> power"
+• Otherwise return "Insufficient power for this spell"
+
+22
+
+FuncMage
+
+Master the Ancient Arts of Functional Programming
+
+You can use time.sleep to simulate waiting time between spells.
+
+Expected Output Example:
+$> python3 decorator_mastery.py
+Testing spell timer...
+Casting fireball...
+Spell completed in 0.101 seconds
+Result: Fireball cast!
+Testing retrying spell...
+Spell failed, retrying... (attempt 1/3)
+Spell failed, retrying... (attempt 2/3)
+Spell casting failed after 3 attempts
+Waaaaaaagh spelled !
+Testing MageGuild...
+True
+False
+Successfully cast Lightning with 15 power
+Insufficient power for this spell
+
+How do decorators enable separation of concerns? What’s the
+difference between @staticmethod and regular instance methods?
