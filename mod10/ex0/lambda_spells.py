@@ -1,4 +1,4 @@
-#!/usr/bin/env python3 
+#!/usr/bin/env python3
 
 
 artifacts = [
@@ -16,14 +16,29 @@ mages = [
     ]
 spells = ['darkness', 'lightning', 'tornado', 'freeze']
 
-artifact_sorter = lambda artifacts: sorted(artifacts, key=lambda a: a['power'], reverse=True)
-power_filter = lambda mages, min_power: list(filter(lambda mage: mage['power'] >= min_power, mages))
-spell_transformer = lambda spells: list(map(lambda spell: '* ' + spell + ' *', spells))
-mage_stats = lambda mages: {
-    'Most powerful mage': max(mages, key=lambda a: a['power'])['power'],
-    'Least powerful mage': min(mages, key=lambda a: a['power'])['power'],
-    'Avreage power level': round(sum(mage['power'] for mage in mages) / len(mages), 2)
-}
+
+def artifact_sorter(artifacts: list[dict]) -> list[dict]:
+    return sorted(artifacts, key=lambda a: a['power'], reverse=True)
+
+
+def power_filter(mages: list[dict], min_power: int) -> list[dict]:
+    return list(filter(lambda mage: mage['power'] >= min_power, mages))
+
+
+def spell_transformer(spells: list[str]) -> list[str]:
+    return list(map(lambda spell: '* ' + spell + ' *', spells))
+
+
+def mage_stats(mages: list[dict]) -> dict:
+    return {
+        'max_power': max(mages, key=lambda a: a['power'])['power'],
+        'min_power': min(mages, key=lambda a: a['power'])['power'],
+        'avg_power': round(
+            sum(m['power'] for m in mages) / len(mages), 2
+        )
+    }
+
+
 print(f"Artifact Sorter:\n{artifact_sorter(artifacts)}")
 print(f"\nPower Filter:\n{power_filter(mages, 70)}")
 print(f"\nSpell Transformer:\n{spell_transformer(spells)}")
