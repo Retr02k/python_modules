@@ -39,7 +39,12 @@ def mage_stats(mages: list[dict]) -> dict:
     }
 
 
-print(f"Artifact Sorter:\n{artifact_sorter(artifacts)}")
-print(f"\nPower Filter:\n{power_filter(mages, 70)}")
-print(f"\nSpell Transformer:\n{spell_transformer(spells)}")
-print(f"\nMage Stats:\n{mage_stats(mages)}")
+def main() -> None:
+    print(f"Artifact Sorter:\n{artifact_sorter(artifacts)}")
+    print(f"\nPower Filter:\n{power_filter(mages, 70)}")
+    print(f"\nSpell Transformer:\n{spell_transformer(spells)}")
+    print(f"\nMage Stats:\n{mage_stats(mages)}")
+
+
+if __name__ == "__main__":
+    main()
