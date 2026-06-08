@@ -1,8 +1,11 @@
 #!/usr/bin/env python3
+from typing import Any
 from collections.abc import Callable
 from functools import (
     reduce,
-    partial
+    partial,
+    lru_cache,
+    singledispatch
 )
 from operator import (
     add,
@@ -11,21 +14,11 @@ from operator import (
 
 
 def base_enchantment(power: int, element: str, target: str) -> str:
-    elements = [
-        "fire",
-        "water",
-        "earth",
-        "wind"
-    ]
-    if element not in elements:
-        raise ValueError(
-            f"Unknown element '{element}'. "
-            "supported elements: fire, water, earth, wind")
     return f"{target} got hit by an {element} attack with {power} ATK"
 
 
 def spell_reducer(spells: list[int], operation: str) -> int:
-    operations_list = {
+    operations_list: dict[str, Callable[[int, int], int]] = {
         "add": add,
         "multiply": mul,
         "max": max,
@@ -50,11 +43,40 @@ def partial_enchanter(base_enchantment: Callable) -> dict[str, Callable]:
         for element in elements
     }
 
-#def memoized_fibonacci(n: int) -> int:
+
+@lru_cache(maxsize=None)
+def memoized_fibonacci(n: int) -> int:
+    if not isinstance(n, int):
+        raise TypeError("n must be integer")
+
+    if n < 0:
+        raise ValueError("n must be non-negative")
+
+    if n < 2:
+        return n
+
+    return memoized_fibonacci(n-1) + memoized_fibonacci(n-2)
 
 
-#def spell_dispatcher() -> Callable[[Any], str]:
+def spell_dispatcher() -> Callable[[Any], str]:
 
+    @singledispatch
+    def cast(spell: Any) -> str:
+        return f"Unknown spell type: {spell}"
+
+    @cast.register
+    def _(spell: int) -> str:
+        return f"Damage spell deals {spell} damage"
+
+    @cast.register
+    def _(spell: str) -> str:
+        return f"Enchantment cast: {spell}"
+
+    @cast.register
+    def _(spell: list) -> str:
+        return f"Multi-cast spell with {len(spell)} spells"
+
+    return cast
 
 
 def main() -> None:
@@ -85,6 +107,25 @@ def main() -> None:
         print(error_message)
 
     print("\n=== Memoized Fibonacci ===")
+    for number in fibonacci_tests:
+        try:
+            print(f"fib({number}) = {memoized_fibonacci(number)}\n"
+                  f"{memoized_fibonacci.cache_info()}\n")
+
+        except (ValueError, TypeError) as error_message:
+            print(error_message)
+
+    print("\n=== Spell Dispatcher ===")
+    spell = spell_dispatcher()
+
+    try:
+        print(spell(42))
+        print(spell("fireball"))
+        print(spell(spell_powers))
+        print(spell({"gabriel": 5000}))
+    except Exception as error_message:
+        print(error_message)
+
 
 if __name__ == "__main__":
     main()
